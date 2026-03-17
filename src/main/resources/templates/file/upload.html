@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fai manager</title>
+</head>
+<body>
+<h2>upload file</h2><br>
+<form th:action="@{/file/upload}" method="post" enctype="multipart/form-data">
+    <label for="file">Chọn tập tin</label>
+    <input type="file" id="file" name="file">
+    <button type="submit">Tải lên</button>
+</form>
+<p th:text="${message}">Vui lòng chọn tệp tin</p>
+</body>
+</html>

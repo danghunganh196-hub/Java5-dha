@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contextinfo</title>
+</head>
+<body>
+<p>duong dan: <span th:text="${contextPath == '' ? '/' : contextPath}"></span></p>
+<p>may chu: <span th:text="${serverInfo}"></span></p>
+<p>duong dan real: <span th:text="${realPath}"></span></p>
+</body>
+</html>

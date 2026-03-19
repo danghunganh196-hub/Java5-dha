@@ -15,17 +15,17 @@ public class ProductController {
     }
     @PostMapping("/order")
         public String createOrder(@RequestParam String id, @RequestParam int quantity, HttpServletResponse response, Model model) {
-        String cart = id + " : " + quantity;
+        String cart = id + ":" + quantity;
         Cookie cookie = new Cookie("cart", cart);
         cookie.setPath("/");
         cookie.setMaxAge(60*60*24);
         response.addCookie(cookie);
-        return "redirect:/cart";
+        return "redirect:/product/cart";
     }
     @GetMapping("/cart")
     public String showCart(@CookieValue(value = "cart",required = false) String cart, Model model) {
         if(cart != null){
-            String[] data = cart.split("i");
+            String[] data = cart.split(":");
             model.addAttribute("id",data[0]);
             model.addAttribute("quantity",Integer.parseInt(data[1]));
         }

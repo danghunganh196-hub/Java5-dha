@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin chi tiết</title>
+</head>
+<body>
+<h2>Thông tin chi tiết</h2>
+<br>
+<ul>
+    <li th:text="'Mã sinh viên:' +${student.id}">Mã</li>
+    <li th:text="'Ho và tên:' +${student.name}">Họ tên</li>
+    <li th:text="'Gioi tinh:' +${student.gender}">Giới tính</li>
+    <li th:text="'Ngay sinh:' +${student.birthday}">Ngày sinh</li>
+    <li th:text="'Ảnh đại diện:' +${student.image}">Ảnh</li>
+    <li th:text="'Điểm trung bình:' +${student.score}">Điểm</li>
+</ul>
+</body>
+</html>

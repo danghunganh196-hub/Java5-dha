@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+
+    @GetMapping("/index/{size}/{page}")
+    public String getAll(@PathVariable("size") int size, @PathVariable("page") int page) {
+        System.out.println("page size: "+size);
+        System.out.println("page number: "+page);
+        return "product/index";
+    }
+
     @GetMapping("/order")
     public String order() {
         return "product/order";

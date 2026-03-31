@@ -3,6 +3,7 @@ package vn.fpoly.java5.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,18 @@ import java.util.Map;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    @Autowired
+    // BEAN INJECTION: 3 CACHs
+
+//    @Autowired
+//    @Qualifier("CookieService1")
     CookieService cookieService;
+
+    // NEN DUNG CONSTRUCTOR INJECTION
+
+    public ProductController(@Qualifier("CookieService") CookieService cookieService) {
+        this.cookieService = cookieService;
+    }
+
 
     @GetMapping("/index/{size}/{page}")
     public String getAll(@PathVariable("size") int size, @PathVariable("page") int page) {
@@ -29,9 +40,15 @@ public class ProductController {
         return "product/order";
     }
     @PostMapping("/order")
-        public String createOrder(@RequestParam String id, @RequestParam int quantity, HttpServletResponse response, Model model) {
+        public String createOrder(
+//                        @Autowired @Qualifier CookieService cookieService,
+                                    @RequestParam String id,
+                                  @RequestParam int quantity,
+                                  HttpServletResponse response,
+                                  Model model) {
+
         String cart = id + ":" + quantity;
-        cookieService.createCookie("cart",cart,60*60*24);
+         cookieService.createCookie("cart",cart,60*60*24);
         response.addCookie(new Cookie("cart",cart));
         return "redirect:/product/cart";
     }

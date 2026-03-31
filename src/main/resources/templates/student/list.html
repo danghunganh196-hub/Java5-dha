@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sinh viên</title>
+</head>
+<body>
+<h2>Chỉ thị th:each</h2>
+<br>
+<th:block th:each="student : ${students}">
+    <ul th:object="${student}">
+        <li>Mã sinh viên: <span th:text="*{id}"></span></li>
+        <li>Tên sinh viên: <span th:text="*{name}"></span></li>
+        <li>Giới tính sinh viên: <span th:text="*{gender}"></span></li>
+        <li>Điểm trung bình sinh viên: <span th:text="*{score}"></span></li>
+        <li>Trạng thái sinh viên: <span th:text="*{status}"></span></li>
+    </ul>
+</th:block>
+</body>
+</html>

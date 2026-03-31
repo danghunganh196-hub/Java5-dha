@@ -1,0 +1,13 @@
+<nav th:fragment="menu">
+    <hr>
+    <a href="/" th:text="#{menu.home}">Trang chủ</a> |
+    <a href="/about" th:text="#{menu.about}">Giới thiệu</a> |
+    <a href="/contact" th:text="#{menu.contact}">Liên hệ</a>
+    <hr>
+    <div style="position: fixed; top: 5px; right: 5px;">
+        <a href="?lang=vi">Tiếng Việt</a>
+            |
+        <a href="?lang=en">English</a>
+            |
+    </div>
+</nav>

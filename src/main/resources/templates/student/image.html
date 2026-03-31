@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sinh vien</title>
+</head>
+<body>
+<h3>Ảnh sinh viên</h3>
+<br>
+<ul th:object="${student}">
+<!--    phuong phap dung bien duong dan (x) dc gan tu {image}-->
+    <li th:text="@{/image/{x} (x=*{image})}"></li>
+<!--    phuong phap cong chuoi-->
+    <li th:text="@{'/images/' + *{image}}"></li>
+<!--    nhung truc tiep vao URL-->
+    <li th:text="@{|/images/*{image}|}"></li>
+</ul>
+</body>
+</html>

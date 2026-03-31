@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html th:fragment="view(title,content)" lang="vi">
+<!--
+Địng nghĩa fragment tên là view nhận 2 tham số: title, content, fragment này đại diện cho layout chính của trang
+-->
+<head>
+    <Title th:replace="${title}">Tiêu đề</Title>
+</head>
+<body>
+<header>
+    <h1>FPT Polytechnic</h1>
+    <nav th:replace="fragments/menu :: menu">Menu</nav>
+</header>
+<article th:replace="${content}">
+    Content
+</article>
+<footer>
+    <hr>
+    &copy; 2026, All rights reserved.
+</footer>
+</body>
+</html>

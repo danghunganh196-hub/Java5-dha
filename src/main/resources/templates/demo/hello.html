@@ -7,5 +7,19 @@
 </head>
 <body>
 <h1 th:text="${subject}">subject</h1>
+<h3>HTML Encode</h3>
+<ul>
+<!--    Hiển thị text, escape HTML-->
+    <li th:text="${var}"></li>
+    <li th:inline="text">Inline: [[${var}]]</li>
+</ul>
+<h3>raw HTML:</h3>
+
+<ul>
+    <!-- Hiển thị HTML gốc-->
+    <li th:utext="${var}"></li>
+<!--    Hiển thị inline không escape-->
+    <li th:inline="html">Inline: [(${var})]</li>
+</ul>
 </body>
 </html>

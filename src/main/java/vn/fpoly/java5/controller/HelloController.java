@@ -10,6 +10,7 @@ public class HelloController {
     public String sayHello(Model model) {
         model.addAttribute("title", "FPT Polytechnic");
         model.addAttribute("subject", "Spring Boot MVC");
+        model.addAttribute("var","FPT <p>Polytechnic</p>");
         return "/demo/hello";
     }
 }

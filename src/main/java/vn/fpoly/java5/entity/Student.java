@@ -1,11 +1,14 @@
 package vn.fpoly.java5.entity;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
 
@@ -15,14 +18,21 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
+    @NotBlank(message = "Mã sinh viên ko được trống")
+//    @NotEmpty
     private String id;
+
     private String name;
-    private boolean gender;
+    private Boolean gender;
 
     @Builder.Default
     private LocalDate birthday = LocalDate.now();
 
     @Builder.Default
     private String image = "image.png";
-    private double score;
+
+    @Range(min = 0, max = 10)
+    private Double score;
+
+    private Integer status;
 }

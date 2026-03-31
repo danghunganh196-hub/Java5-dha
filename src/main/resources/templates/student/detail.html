@@ -7,13 +7,33 @@
 <body>
 <h2>Thông tin chi tiết</h2>
 <br>
-<ul>
-    <li th:text="'Mã sinh viên:' +${student.id}">Mã</li>
-    <li th:text="'Ho và tên:' +${student.name}">Họ tên</li>
-    <li th:text="'Gioi tinh:' +${student.gender}">Giới tính</li>
-    <li th:text="'Ngay sinh:' +${student.birthday}">Ngày sinh</li>
-    <li th:text="'Ảnh đại diện:' +${student.image}">Ảnh</li>
-    <li th:text="'Điểm trung bình:' +${student.score}">Điểm</li>
+<ul th:object="${student}">
+    <li th:text="'Mã sinh viên:' +*{#strings.toUpperCase(id)}">Mã</li>
+    <li th:text="'Ho và tên:' +*{#strings.capitalizeWords(name)}">Họ tên</li>
+    <li th:text="'Gioi tinh:' + (*{gender} ? 'Nam' : 'Nữ')">Giới tính</li>
+    <li th:text="'Ngay sinh:' +*{#temporals.format(birthday)}">Ngày sinh</li>
+    <li th:text="'Ảnh đại diện:' +*{image}">Ảnh</li>
+    <li th:text="'Điểm trung bình:' +*{#numbers.formatDecimal(score,1,2)}">Điểm</li>
+    <li th:with="*{status}">
+        <span th:case="0">Trạng thái: Đang học</span>
+        <span th:case="1">Trạng thái: Bảo lưu</span>
+        <span th:case="2">Trạng thái: Đã tốt nghiệp</span>
+        <span th:case="3">Trạng thái: Thất học</span>
+    </li>
 </ul>
+<h2>Chir thị th:with</h2><br>
+<div th:with="toan=8,van=7,tiengAnh=9,diemTrungBinh=${(toan+van+tiengAnh)/3}">
+    <ul>
+        <li>Môn toán: <span th:text="${toan}"></span></li>
+        <li>Môn văn: <span th:text="${van}"></span></li>
+        <li>Môn anh: <span th:text="${tiengAnh}"></span></li>
+        <li>Điểm trung bình: <span th:text="${diemTrungBinh}"></span></li>
+
+        <li th:if="${diemTrungBinh < 5}">Xếp loại: Yếu</li>
+        <li th:if="${diemTrungBinh >= 5 and diemTrungBinh <= 6.5}">Xếp loại: Trung bình</li>
+        <li th:if="${diemTrungBinh > 6.5 and diemTrungBinh < 8}">Xếp loại: Khá</li>
+        <li th:if="${diemTrungBinh > 8}">Xếp loại: Giỏi</li>
+    </ul>
+</div>
 </body>
 </html>

@@ -8,11 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.fpoly.java5.services.BankService;
 import vn.fpoly.java5.services.MoMoService;
+import vn.fpoly.java5.services.PaymentService;
 import vn.fpoly.java5.services.VNPayService;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/order")
 public class CheckoutController {
+
+    private final Map<String, PaymentService> paymentService;
+    public CheckoutController(Map<String, PaymentService> paymentService) {
+        this.paymentService = paymentService;
+    }
+
     @GetMapping("/checkout")
     public String showCheckoutPage(){
         return "order/checkout";
@@ -20,30 +29,32 @@ public class CheckoutController {
     @PostMapping("/checkout")
     public String checkout(@RequestParam String type, Model model){
         String message = "";
-        switch(type){
-            case "VNPAY":
-                VNPayService vnPayService = new VNPayService();
-                vnPayService.pay();
-                message = "VNPAY";
-                model.addAttribute("message", message);
-                break;
-            case "MOMO":
-                MoMoService moMoService = new MoMoService();
-                moMoService.pay();
-                message = "MOMO";
-                model.addAttribute("message", message);
-                break;
-            case "BANK":
-                BankService bankService = new BankService();
-                bankService.pay();
-                message = "BANK";
-                model.addAttribute("message", message);
-                break;
-                default:
-                    message = "Phương thức không hợp lệ";
-                    model.addAttribute("message", message);
-                    break;
-        }
+//        switch(type){
+//            case "VNPAY":
+//                VNPayService vnPayService = new VNPayService();
+//                vnPayService.pay();
+//                message = "VNPAY";
+//                model.addAttribute("message", message);
+//                break;
+//            case "MOMO":
+//                MoMoService moMoService = new MoMoService();
+//                moMoService.pay();
+//                message = "MOMO";
+//                model.addAttribute("message", message);
+//                break;
+//            case "BANK":
+//                BankService bankService = new BankService();
+//                bankService.pay();
+//                message = "BANK";
+//                model.addAttribute("message", message);
+//                break;
+//                default:
+//                    message = "Phương thức không hợp lệ";
+//                    model.addAttribute("message", message);
+//                    break;
+//        }
+        paymentService.get(type).pay();
+        model.addAttribute("message", type.toUpperCase());
         return "order/result";
     }
 }

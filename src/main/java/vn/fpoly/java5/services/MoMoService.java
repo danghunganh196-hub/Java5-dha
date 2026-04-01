@@ -1,6 +1,9 @@
 package vn.fpoly.java5.services;
 
-public class MoMoService {
+import org.springframework.stereotype.Service;
+
+@Service("momo")
+public class MoMoService implements PaymentService{
     public void pay(){
         System.out.println("Thanh toán bằng MoMo");
     }

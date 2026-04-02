@@ -5,8 +5,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public interface CookieService {
-    Cookie createCookie(String name, String value, Integer maxAge);
-    String getCookie(String name, HttpServletRequest request);
-    void removeCookie(String name, HttpServletRequest request, HttpServletResponse response);
+    Cookie createCookie(String name, String value, int expiry);
+    Cookie getCookie(String name);
+    String getCookieByValue(String name);
+    void deleteCookie(String name);
 }
 

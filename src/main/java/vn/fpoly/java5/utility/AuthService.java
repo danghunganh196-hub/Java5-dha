@@ -3,9 +3,11 @@ package vn.fpoly.java5.utility;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.util.List;
+
 public interface AuthService {
-    void login(String username, String password, HttpServletRequest request, HttpServletResponse response);
-    void logout(HttpServletRequest request, HttpServletResponse response);
-    boolean isLoggedIn(HttpServletRequest request);
-    String getAccount(HttpServletRequest request);
+String getUserName();
+List<String> getRoles();
+Boolean isAuthenticated();
+Boolean hasAnyRole(String ...roles);
 }

@@ -23,7 +23,7 @@ public class ProductController {
 
     // NEN DUNG CONSTRUCTOR INJECTION
 
-    public ProductController(@Qualifier("CookieService") CookieService cookieService) {
+    public ProductController(@Qualifier("cookieService") CookieService cookieService) {
         this.cookieService = cookieService;
     }
 

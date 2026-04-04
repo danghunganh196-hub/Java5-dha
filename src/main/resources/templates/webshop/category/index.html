@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+  <h3>Quản lý danh mục loại sản phẩm</h3>
+  <hr>
+  <table style="width: 60%; border-collapse: collapse;" border="1">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>Id</th>
+      <th>Tên</th>
+      <th>Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c, row : ${categories}">
+      <td th:text="${row.count}"></td>
+      <td th:text="${c.id}"></td>
+      <td th:text="${c.name}"></td>
+      <td>
+        <a>Cập nhật</a>
+        |
+        <a>Xoá</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>

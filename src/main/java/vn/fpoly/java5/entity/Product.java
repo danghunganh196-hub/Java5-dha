@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,16 +17,31 @@ import lombok.Setter;
 @Table(name = "Product")
 public class Product {
     @Id
-    @Column(name="id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
+    private Integer id;
 
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "image")
+    @Column(name = "Image")
     private String image;
 
+    @Column(name = "Price")
+    private Double price;
+
+    @Column(name = "Quantity")
+    private Integer quantity;
+
+    @Column(name = "CreateDate")
+    private LocalDate createDate;
+
+    @Column(name = "Available")
+    private Boolean available;
+
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetails;
 }

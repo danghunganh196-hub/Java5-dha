@@ -40,7 +40,7 @@ public class Product {
     private Boolean available;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "CategoryId", nullable = false)
     private Category category;
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;

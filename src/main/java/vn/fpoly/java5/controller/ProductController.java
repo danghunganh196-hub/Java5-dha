@@ -2,11 +2,14 @@ package vn.fpoly.java5.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import vn.fpoly.java5.entity.Product;
+import vn.fpoly.java5.services.ProductService;
 import vn.fpoly.java5.utility.CookieService;
 
 import java.util.LinkedHashMap;
@@ -15,6 +18,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+    ProductService productService;
+
     // BEAN INJECTION: 3 CACHs
 
 //    @Autowired
@@ -23,8 +28,9 @@ public class ProductController {
 
     // NEN DUNG CONSTRUCTOR INJECTION
 
-    public ProductController(@Qualifier("cookieService") CookieService cookieService) {
+    public ProductController(@Qualifier("cookieService") CookieService cookieService, ProductService productService) {
         this.cookieService = cookieService;
+        this.productService = productService;
     }
 
 
@@ -70,5 +76,17 @@ public class ProductController {
     model.addAttribute("categories",categories);
     model.addAttribute("selectedCatId","1");
     return "product/list";
+    }
+    @GetMapping("/filter-by-price")
+    public String filterByPrice(Model model) {
+        List<Product> productList = productService.getByPrice();
+        model.addAttribute("productList",productList);
+        return "product/filter";
+    }
+    @GetMapping("/filter-by-name")
+    public String filterByName(Model model) {
+        List<Product> productList = productService.getByName();
+        model.addAttribute("productList",productList);
+        return "product/filter";
     }
 }

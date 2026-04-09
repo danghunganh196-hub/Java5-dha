@@ -6,6 +6,13 @@
 </head>
 <body>
 <h3>Danh sách sản phẩm</h3>
+<form action="/product/filter-by-quantity" method="get" style="margin-bottom: 20px">
+    Số lượng từ:
+    <input type="number" name="min">
+    Đến:
+    <input type="number" name="max">
+    <button type="submit">Tìm</button>
+</form>
 <hr>
 <table style="border: 1px; width:40%; text-align: center">
     <thead>

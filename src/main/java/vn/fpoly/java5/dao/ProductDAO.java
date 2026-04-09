@@ -16,4 +16,8 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     //Truy vấn theo dạng thức SQL thuần (Native Query)
     @Query(value = "SELECT * FROM Product WHERE Name LIKE '%Mac%' ",nativeQuery = true )
     List<Product> findByName();
+
+    //Truy vấn với tham số
+    @Query(value = "SELECT p FROM Product p WHERE p.quantity BETWEEN ?1 AND ?2")
+    List<Product> findByQuantity(int min,int max);
 }

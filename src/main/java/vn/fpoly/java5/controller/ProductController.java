@@ -89,4 +89,12 @@ public class ProductController {
         model.addAttribute("productList",productList);
         return "product/filter";
     }
+    @GetMapping("/filter-by-quantity")
+    public String filterByQuantity(@RequestParam ("min") int min,
+                                   @RequestParam ("max") int max,
+                                   Model model) {
+        List<Product> productList = productService.getByPrice();
+        model.addAttribute("productList",productList);
+        return "product/filter";
+    }
 }

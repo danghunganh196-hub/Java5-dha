@@ -20,4 +20,8 @@ public class ProductService {
     public List<Product> getByName(){
         return productDAO.findByName();
     }
+
+    public List<Product> getByQuantity(int min, int max){
+        return productDAO.findByQuantity(min,max);
+    }
 }

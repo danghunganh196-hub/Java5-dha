@@ -7,6 +7,28 @@
 <body>
   <h3>Quản lý danh mục loại sản phẩm</h3>
   <hr>
+  <form th:action="@{/webshop/category/create}"th:object="${category}" th:method="post">
+    <div>
+      <label>Mã</label>
+      <input type="text" th:field="*{id}">
+    </div>
+    <br>
+    <div>
+      <label>Tên</label>
+      <input type="text" th:field="*{name}">
+    </div>
+    <br>
+    <div>
+      <button type="submit" formaction="/webshop/category/create">Create</button>
+      <button type="submit" formaction="/webshop/category/update">Update</button>
+      <button type="button" onclick="if(document.querySelector('[name=id]').value &&
+    confirm('Delete?')) {
+      window.location = '/webshop/category/delete/'
+      + document.querySelector('[name=id]').value
+    }">Delete</button>
+      <button type="reset">Reset</button>
+    </div>
+  </form>
   <table style="width: 60%; border-collapse: collapse;" border="1">
     <thead>
     <tr>
@@ -22,9 +44,11 @@
       <td th:text="${c.id}"></td>
       <td th:text="${c.name}"></td>
       <td>
-        <a>Cập nhật</a>
+        <a th:href="@{/webshop/category/edit/{id}(id=${c.id})}">Cập nhật</a>
         |
-        <a>Xoá</a>
+        <a th:href="@{/webshop/category/delete/{id}(id=${c.id})}"
+        onclick="return confirm('Delete this category?')"
+        >Xoá</a>
       </td>
     </tr>
     </tbody>

@@ -1,7 +1,9 @@
 package vn.fpoly.java5.dao;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.fpoly.java5.entity.Product;
 
@@ -18,6 +20,13 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     List<Product> findByName();
 
     //Truy vấn với tham số
-    @Query(value = "SELECT p FROM Product p WHERE p.quantity BETWEEN ?1 AND ?2")
-    List<Product> findByQuantity(int min,int max);
+//    @Query(value = "SELECT p FROM Product p WHERE p.quantity BETWEEN ?1 AND ?2")
+//    List<Product> findByQuantity(int min,int max);
+
+    //Truy vấn với tham số truyền theo parameter
+    @Query(value = "SELECT p FROM Product p WHERE p.quantity BETWEEN :min AND :max")
+    List<Product> findByQuantity(@Param("min") int min, @Param("max") int max);
+
+//    @Query(name="findByCategory")
+//    List<Product> findByCategory(String categoryId);
 }

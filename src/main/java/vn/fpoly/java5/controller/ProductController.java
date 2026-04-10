@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -90,10 +91,16 @@ public class ProductController {
         return "product/filter";
     }
     @GetMapping("/filter-by-quantity")
-    public String filterByQuantity(@RequestParam ("min") int min,
-                                   @RequestParam ("max") int max,
+    public String filterByQuantity(@RequestParam (value = "min",required = false) Integer min,
+                                   @RequestParam (value = "max",required = false) Integer max,
                                    Model model) {
-        List<Product> productList = productService.getByPrice();
+        if(min == null){
+            min = 0;
+        }
+        if(max == null){
+            max = 1000;
+        }
+        List<Product> productList = productService.getByQuantity(min,max);
         model.addAttribute("productList",productList);
         return "product/filter";
     }

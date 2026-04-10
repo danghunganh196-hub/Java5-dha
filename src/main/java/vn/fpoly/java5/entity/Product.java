@@ -15,6 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Product")
+@NamedQueries({
+        @NamedQuery(name = "findByCategory",
+        query = "FROM Product p WHERE p.category.id=:categoryId")
+})
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

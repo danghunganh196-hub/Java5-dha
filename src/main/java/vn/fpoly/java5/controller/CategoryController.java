@@ -25,10 +25,19 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public String handleCreate(@ModelAttribute("category") Category category) {
-        if(!categoryService.categoryIdExist(category.getId())) {
+    public String handleCreate(@ModelAttribute("category") Category category,
+                               Model model) {
+        if (!categoryService.categoryIdExist(category.getId())) {
             categoryService.save(category);
         }
+        // ✅ Luôn redirect, không return template trực tiếp
+        return "redirect:/webshop/category/index";
+    }
+
+    @PostMapping("/update")
+    public String handleUpdate(@ModelAttribute("category") Category category) {
+        categoryService.save(category);
+        // ✅ Luôn redirect
         return "redirect:/webshop/category/index";
     }
     @GetMapping("/edit/{id}")
@@ -36,12 +45,7 @@ public class CategoryController {
         Category category = categoryService.getById(id).orElse(null);
         model.addAttribute("category", category);
         model.addAttribute("categories", categoryService.getAll());
-        return "/webshop/category/index";
-    }
-    @PostMapping("/update")
-    public String handleUpdate(@ModelAttribute("category") Category category) {
-        categoryService.save(category);
-        return "redirect:/webshop/category/index";
+        return "webshop/category/index";
     }
     @GetMapping("/delete/{id}")
     public String handleDelete(@PathVariable("id") String id) {

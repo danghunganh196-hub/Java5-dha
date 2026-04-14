@@ -78,14 +78,21 @@ public class AuthController {
         return "auth/login";
     }
     @PostMapping("/auth/login-form")
-    public String processLoginForm(Model model, @RequestParam("username") String username,
-                                   @RequestParam("password") String password) {
-        if(username == "user123" && password == "pass123"){
-            model.addAttribute("username", username);
-            model.addAttribute("password", password);
-            model.addAttribute("status", "Đăng nhập thành công");
-            return "auth/index";
-        }else{
+    public String processLoginForm(Model model,
+                                   @RequestParam("username") String username,
+                                   @RequestParam("password") String password,
+                                   HttpServletRequest request) {
+
+        System.out.println(">>> username nhận được: " + username);
+        System.out.println(">>> password nhận được: " + password);
+
+        if("user123".equals(username) && "pass123".equals(password)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
+            System.out.println(">>> Đăng nhập thành công, user trong session: " + session.getAttribute("user"));
+            return "webshop/category/index";
+        } else {
+            System.out.println(">>> Đăng nhập thất bại");
             return "auth/login";
         }
     }

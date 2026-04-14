@@ -14,7 +14,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
         HttpSession session = request.getSession(false);
-        if(session != null || session.getAttribute("user") != null) {
+        if(session == null || session.getAttribute("user") == null) {
             response.sendRedirect(request.getContextPath() + "/auth/login-form");
             return false;
         }

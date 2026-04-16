@@ -30,14 +30,12 @@ public class CategoryController {
         if (!categoryService.categoryIdExist(category.getId())) {
             categoryService.save(category);
         }
-        // ✅ Luôn redirect, không return template trực tiếp
         return "redirect:/webshop/category/index";
     }
 
     @PostMapping("/update")
     public String handleUpdate(@ModelAttribute("category") Category category) {
         categoryService.save(category);
-        // ✅ Luôn redirect
         return "redirect:/webshop/category/index";
     }
     @GetMapping("/edit/{id}")

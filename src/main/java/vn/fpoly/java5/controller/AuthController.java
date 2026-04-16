@@ -90,7 +90,7 @@ public class AuthController {
             HttpSession session = request.getSession();
             session.setAttribute("user", username);
             System.out.println(">>> Đăng nhập thành công, user trong session: " + session.getAttribute("user"));
-            return "webshop/category/index";
+            return "redirect:/webshop/category/index";
         } else {
             System.out.println(">>> Đăng nhập thất bại");
             return "auth/login";
